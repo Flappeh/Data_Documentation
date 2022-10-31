@@ -94,6 +94,8 @@ After all the questions are answered, the script will proceed to installation as
   :alt: Script Example
 
 Step 4: Verify installation
++++++++++++++++++++++++++++
+
 After installation is complete, you can switch to the Linux user who owns the platform (created in :ref:`Step 2`) with the following command :
 
 .. code-block:: console
