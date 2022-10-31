@@ -77,28 +77,38 @@
 <p>problem :
 1. Unable to expand cluster in vm</p>
 <blockquote>
-<div><p>If the output returns this error :
-.. code-block:: console</p>
-<blockquote>
-<div><p>[Error] ExternalError (Failed to send rpc GetClusterInfo to &lt;Cluster IP&gt;:9177 after retry 3 times; rpc error: code = Unavailable desc =
-all SubConns are in TransientFailure, latest connection error: connection error: desc = “transport: Error while dialing dial tcp
-&lt;Cluster IP&gt;:9177: connect: no route to host”</p>
-</div></blockquote>
-<p>then you need to check open ports using this command :
-.. code-block:: console</p>
-<blockquote>
-<div><p>#install iptables if not installed
+<div><p>If the output returns this error :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[Error] ExternalError (Failed to send rpc GetClusterInfo to &lt;Cluster IP&gt;:9177 after retry 3 times; rpc error: code = Unavailable desc =
+all SubConns are in TransientFailure, latest connection error: connection error: desc = &quot;transport: Error while dialing dial tcp
+&lt;Cluster IP&gt;:9177: connect: no route to host&quot;
+</pre></div>
+</div>
+<p>then you need to check open ports using this command :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#install iptables if not installed</span>
 $ sudo yum/apt install iptables-services
-#start the service
+
+<span class="c1">#start the service</span>
 systemctl start iptables
-#check if the service is running
+
+<span class="c1">#check if the service is running</span>
 service iptables status
-#check if port “9177” is open in firewall in Chain Input (policy Accept)
+
+<span class="c1">#check if port &quot;9177&quot; is open in firewall in Chain Input (policy Accept)</span>
 $ sudo iptables -L
-#if the port isn’t open yet, then add it into the chain input policy using :
-sudo iptables -I INPUT -p tcp -m tcp –dport 9177 -j ACCEPT</p>
+
+<span class="c1">#if the port isn&#39;t open yet, then add it into the chain input policy using :</span>
+sudo iptables -I INPUT -p tcp -m tcp --dport <span class="m">9177</span> -j ACCEPT
+</pre></div>
+</div>
 </div></blockquote>
-</div></blockquote>
+<ol class="arabic" start="2">
+<li><p>Unable to open graphstudio in browser after changing default cluster ip from <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code></p>
+<p>You need to open <code class="docutils literal notranslate"><span class="pre">14240</span></code> port locally using iptables with “OUTPUT” rule using this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo iptables -I OUTPUT -p tcp -m tcp --dport <span class="m">14240</span> -j ACCEPT
+</pre></div>
+</div>
+</li>
+</ol>
 </section>
 
 
