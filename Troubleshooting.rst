@@ -9,7 +9,7 @@ This is a page for every common errors that are encountered while installing app
 problem : 
 1. Unable to expand cluster in vm
 
-    If the output returns this error : 
+    If the output returns this error: 
 
     .. code-block:: text
 
